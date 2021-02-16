@@ -1,6 +1,6 @@
 # File Storage with Laravel 8
 
-This is a Laravel 8 project with laravel/ui authentication scaffolding where we work with files.
+This is a Laravel 8 project with laravel/ui authentication scaffolding where we go through the process of uploading files.
 
 ## How to use
 

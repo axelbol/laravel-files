@@ -35,35 +35,54 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+    //     $book = $request->all();
+    //     $book['uuid'] = (string) Str::uuid();
+
+    //     if($request->hasFile('book_image')){
+    //         /**
+    //          * 01
+    //         */
+    //         // $book['book_image'] = $request->file('book_image')->store('books');
+    //         /**
+    //          * 02
+    //          */
+    //         // $book['book_image'] = $request->file('book_image')->getClientOriginalName();
+    //         // $request->file('book_image')->storeAs('folder_books', $book['book_image']);
+    //         /**
+    //          * 03
+    //          */
+    //         // $book['book_image'] = time() . '_' . $request->file('book_image')->getClientOriginalName();
+    //         // $request->file('book_image')->storeAs('folder_books', $book['book_image']);
+    //         /**
+    //          * 04
+    //          */
+    //         $book['book_image'] = time() . '_' . $request->file('book_image')->getClientOriginalName();
+    //         $request->file('book_image')
+    //             ->storeAs('book_folder/' . auth()->id(), $book['book_image']);
+    //     }
+
+    //     Book::create($book);
+    //     return redirect()->route('books.index');
+    // }
+
+    /**
+     * Store number 5
+     */
     public function store(Request $request)
     {
-        $book = $request->all();
-        $book['uuid'] = (string) Str::uuid();
-
-        if($request->hasFile('book_image')){
-            /**
-             * 01
-            */
-            // $book['book_image'] = $request->file('book_image')->store('books');
-            /**
-             * 02
-             */
-            // $book['book_image'] = $request->file('book_image')->getClientOriginalName();
-            // $request->file('book_image')->storeAs('folder_books', $book['book_image']);
-            /**
-             * 03
-             */
-            // $book['book_image'] = time() . '_' . $request->file('book_image')->getClientOriginalName();
-            // $request->file('book_image')->storeAs('folder_books', $book['book_image']);
-            /**
-             * 04
-             */
-            $book['book_image'] = time() . '_' . $request->file('book_image')->getClientOriginalName();
+        $book = Book::create([
+            'uuid' => (string) Str::orderedUuid(),
+            'title' => $request->title,
+        ]);
+        if($request->hasFile('book_image'))
+        {
+            $image = $request->file('book_image')->getClientOriginalName();
             $request->file('book_image')
-                ->storeAs('book_folder/' . auth()->id(), $book['book_image']);
+                ->storeAs('subfolfer/' . $book->id, $image);
+            $book->update(['book_image' => $image]);
         }
-
-        Book::create($book);
         return redirect()->route('books.index');
     }
 
