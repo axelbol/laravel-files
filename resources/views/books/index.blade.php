@@ -19,7 +19,7 @@
               @forelse ($books as $book)
                 <tr>
                   <td>{{ $book->title }}</td>
-                  <td><a href="#"></a>{{ $book->book_image }}</td>
+                  <td><a href="{{ route('books.download', $book->uuid) }}">{{ $book->book_image }}</a></td>
                 </tr>
               @empty
                 <tr>

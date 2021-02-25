@@ -22,4 +22,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('books', BookController::class);
+Route::get('books/{uuid}/download', [BookController::class, 'download'])->name('books.download');
+Route::resource('books', BookController::class)->middleware('auth');
