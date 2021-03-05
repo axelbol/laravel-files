@@ -15,11 +15,13 @@
               <tr>
                 <th>Title</th>
                 <th>Download file</th>
+                <th>Edit</th>
               </tr>
               @forelse ($books as $book)
                 <tr>
                   <td>{{ $book->title }}</td>
                   <td><a href="{{ route('books.download', $book->uuid) }}">{{ $book->book_image }}</a></td>
+                  <td><a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-danger">Edit</a></td>
                 </tr>
               @empty
                 <tr>
